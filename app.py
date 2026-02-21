@@ -10,6 +10,10 @@ st.set_page_config(page_title="Gestión de Finanzas", page_icon="💰", layout="
 # Initialize SQLite database
 init_db()
 
+# Initialize last date used in session state, defaults to today
+if 'last_date' not in st.session_state:
+    st.session_state.last_date = datetime.date.today()
+
 # Custom Styling (Dark/Rich Aesthetics)
 st.markdown("""
     <style>
@@ -54,7 +58,7 @@ with st.sidebar:
     t_type = st.radio("Tipo de Movimiento", ["Ingreso", "Gasto"], horizontal=True)
 
     with st.form("transaction_form", clear_on_submit=True):
-        t_date = st.date_input("Fecha", datetime.date.today())
+        t_date = st.date_input("Fecha", st.session_state.last_date)
         t_amount = st.number_input(
             "Monto (COP)", 
             min_value=0.0, 
@@ -77,6 +81,8 @@ with st.sidebar:
         
         if submitted:
             add_transaction(t_date.strftime("%Y-%m-%d"), t_amount, t_category, t_type)
+            # Update session state date so the next form uses this date
+            st.session_state.last_date = t_date
             st.success("✅ ¡Movimiento registrado con éxito!")
             # Retain a small delay or just let the app rerun to show updated data
 
