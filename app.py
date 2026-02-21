@@ -58,16 +58,15 @@ with st.sidebar:
         t_amount = st.number_input(
             "Monto (COP)", 
             min_value=0.0, 
-            format="%.2f", 
-            step=None, 
+            format="%.2f",
             help="Digita el número sin puntos ni comas de miles. Por ejemplo, para un millón escribe 1000000. Usa el punto (.) solo si necesitas separar decimales."
         )
         
         if t_type == "Gasto":
             t_category = st.selectbox("Categoría", [
-                "Alimentación", "Transporte", "Servicios (Agua/Luz/Internet)", 
-                "Inventario / Mercadería", "Nómina / Salarios", "Alquiler", 
-                "Marketing", "Mantenimiento", "Otros"
+                "Alimentación", "Domicilios", "Café", "Servicio de tostión",
+                "Servicios (Agua/Luz/Internet)", "Inventario / Mercadería", 
+                "Nómina / Salarios", "Alquiler", "Marketing", "Mantenimiento", "Otros"
             ])
         else:
             t_category = st.selectbox("Categoría", [
