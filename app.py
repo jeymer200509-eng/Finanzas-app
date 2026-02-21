@@ -56,9 +56,9 @@ with st.sidebar:
     st.title("Nuevo Registro")
     
     t_type = st.radio("Tipo de Movimiento", ["Ingreso", "Gasto"], horizontal=True)
+    t_date = st.date_input("Fecha", st.session_state.last_date)
 
     with st.form("transaction_form", clear_on_submit=True):
-        t_date = st.date_input("Fecha", st.session_state.last_date)
         t_amount = st.number_input(
             "Monto (COP)", 
             min_value=0.0, 
